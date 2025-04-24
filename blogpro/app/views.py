@@ -4,32 +4,33 @@ from .models import User
 def home(req):
     return render(req,'home.html')
 
-# def home1(req,pk=None):
-#     userdata=User.objects.get(stu_id=pk)
-#     print(userdata)
-#     userdata={
-#                    'name':userdata.stu_name,
-#                    'email':userdata.stu_email,
-#                    'password':userdata.stu_password,
-#                    'image':userdata.stu_image,
-#                    'mycv':userdata.stu_document
-#                 }
-#     return render(req,'home.html',{'user':userdata})
+def home1(req,pk):
+    userdata=User.objects.get(id=pk)
+    print(userdata)
+    # userdata1={    
+    #                'id':userdata.id,
+    #                'name':userdata.User_name,
+    #                'email':userdata.User_email,
+    #                'password':userdata.User_password,
+    #                'image':userdata.User_image,
+    #                'mycv':userdata.User_document
+    #             }
+    return render(req,'home.html',{'user':userdata})
 
 def about(req):
     return render(req,'about.html')
 
-# def about1(req,pk=None):
-#     userdata=User.objects.get(stu_id=pk)
-#     print(userdata)
-#     userdata={
-#                    'name':userdata.stu_name,
-#                    'email':userdata.stu_email,
-#                    'password':userdata.stu_password,
-#                    'image':userdata.stu_image,
-#                    'mycv':userdata.stu_document
-#                 }
-#     return render(req,'about.html',{'user':userdata})
+def about1(req,pk):
+    userdata=User.objects.get(id=pk)
+    print(userdata)
+    # userdata1={    'id':userdata.id,
+    #                'name':userdata.User_name,
+    #                'email':userdata.User_email,
+    #                'password':userdata.User_password,
+    #                'image':userdata.User_image,
+    #                'mycv':userdata.User_document
+    #             }
+    return render(req,'about.html',{'user':userdata})
 
 
 def login(req):
@@ -76,13 +77,14 @@ def logindata(req):
             print(userdata)
             if userdata.User_password==password:
                 error='Welcome to Dashboard'
-                userdata={
-                   'name':userdata.User_name,
-                   'email':userdata.User_email,
-                   'password':userdata.User_password,
-                   'img':userdata.User_image
-                }
-                print(userdata)
+                # userdata1={
+                #     'id':userdata.id,
+                #    'name':userdata.User_name,
+                #    'email':userdata.User_email,
+                #    'password':userdata.User_password,
+                #    'img':userdata.User_image
+                # }
+                print(userdata.User_name)
                 return render(req,'userdashboard.html',{'user':userdata})
             else:
                 error='Email & Password not match'
@@ -99,8 +101,32 @@ def logindata(req):
 def feature(req):
     return render(req,'feature.html')
 
+def feature1(req,pk):
+    userdata=User.objects.get(id=pk)
+    print(userdata)
+    # userdata1={    'id':userdata.id,
+    #                'name':userdata.User_name,
+    #                'email':userdata.User_email,
+    #                'password':userdata.User_password,
+    #                'image':userdata.User_image,
+    #                'mycv':userdata.User_document
+    #             }
+    return render(req,'feature.html',{'user':userdata})
+
+
 def account(req):
     return render(req,'account.html')
 
-def account(req):
-    return render(req,'userdashboard.html')
+
+
+def account1(req,pk):
+    userdata=User.objects.get(id=pk)
+    print(userdata)
+    # userdata1={    'id':userdata.id,
+    #                'name':userdata.User_name,
+    #                'email':userdata.User_email,
+    #                'password':userdata.User_password,
+    #                'image':userdata.User_image,
+    #                'mycv':userdata.User_document
+    #             }
+    return render(req,'userdashboard.html',{'user':userdata})
