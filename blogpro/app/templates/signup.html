@@ -5,19 +5,20 @@
    <main class="container py-5">
       <div class="form-signup">
         <h2 class="form-title">Create an Account</h2>
-        <h5 color=red>{{error}}</h5>
+        
         <form action="{% url 'registerdata' %}" method="POST" enctype="multipart/form-data">
          {% csrf_token %}
           <div class="mb-3">
             <label for="username" class="form-label">Username</label>
             <input type="text" class="form-control" id="username" name="username" value="{{key.name}}" required>
           </div>
+          <h6 c-red p-0 m-0 >{{error}}</h6>
 
           <div class="mb-3">
             <label for="email" class="form-label">Email address</label>
             <input type="email" class="form-control" id="email" name="email" value="{{key.email}}" required>
           </div>
-
+           <h6 c-red p-0 m-0 >{{error1}}</h6>
   
           <div class="mb-3">
             <label class="form-label d-block">Gender</label>
