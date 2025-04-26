@@ -57,6 +57,7 @@ def registerdata(req):
         if str(i) in n:
             msg='number is not allowed in username'
             return render(req,'signup.html',{'error':msg})
+        
     if "@" not in e or "." not in e:
         msg = "Invalid email"
         return render(req, 'signup.html', {'error1': msg})
@@ -101,7 +102,8 @@ def logindata(req):
                    'img':userdata.User_image
                 }
                 print(userdata.User_name)
-                return render(req,'userdashboard.html',{'userdata':userdata1})
+                button="Logout"
+                return render(req,'userdashboard.html',{'userdata':userdata1 ,'button':button})
             else:
                 error='Email & Password not match'
                 return render(req,'login.html',{'error':error})             
@@ -133,12 +135,16 @@ def feature1(req,pk):
 
 
 def account(req):
-    return render(req,'account.html')
+    msg="Please Register your Account"
+    button="Login"
+   
+    return render(req,'userdashboard.html' ,{'error': msg,'button':button})
 
 
 
 def account1(req,pk):
     userdata=User.objects.get(id=pk)
+    button="Logout"
     print(userdata)
     userdata1={    'id':userdata.id,
                    'name':userdata.User_name,
@@ -148,4 +154,4 @@ def account1(req,pk):
                    'img':userdata.User_image,
                    'mycv':userdata.User_document,
                 }
-    return render(req,'userdashboard.html',{'userdata':userdata1})
+    return render(req,'userdashboard.html',{'userdata':userdata1 ,'button':button})

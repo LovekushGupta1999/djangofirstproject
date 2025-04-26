@@ -4,7 +4,7 @@
 {% block content %}  
    <main class="dashboard-wrapper">
       <div class="profile-card text-center">
-       
+          <h1 class="mb-1">{{error}}</h1>
         <img src="{{userdata.img.url}}" alt="Profile Image" class="profile-img mb-3">
 
    
@@ -14,7 +14,7 @@
 
         <div class="mt-4">
           <a href="#" class="btn btn-outline-primary me-2">Edit Profile</a>
-          <a href="{% url 'home' %}" class="btn btn-danger">Logout</a>
+          <a href="{% url 'home' %}" class="btn btn-danger">{{button}}</a>
         </div>
       </div>
     </main>
