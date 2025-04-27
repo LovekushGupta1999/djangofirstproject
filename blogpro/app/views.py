@@ -53,23 +53,58 @@ def registerdata(req):
     # print(n,e,g,pa,pc,cp,r)
     data={'name':n,'email':e,'profilepic':pc,'document':r}
     user=User.objects.filter(User_email=e)
-    for i in range(0,10):
-        if str(i) in n:
-            msg='number is not allowed in username'
-            return render(req,'signup.html',{'error':msg})
-        
-    if "@" not in e or "." not in e:
-        msg = "Invalid email"
-        return render(req, 'signup.html', {'error1': msg})
-    if "@." in e or ".@" in e:
-        msg = "Invalid email"
-        return render(req, 'signup.html', {'error1': msg})
-
-   
     if user:
-        msg="Email exist"
-        return render(req,'login.html',{'error1':msg})  
-    else:
+       msg="Email exist"
+       return render(req,'login.html',{'error1':msg}) 
+    else: 
+        for i in range(0,10):
+            if str(i) in n:
+                msg='*Number is not allowed in username'
+                return render(req,'signup.html',{'error':msg})
+            
+        if "@" not in e or "." not in e:
+            msg = "*Invalid email"
+            return render(req, 'signup.html', {'error1': msg})
+        if "@." in e or ".@" in e:
+            msg = "*Invalid email"
+            return render(req, 'signup.html', {'error1': msg})
+        
+        if len(pa)<8:
+                    msg='*Please must be Password length 8 or more'
+                    return render(req,'signup.html',{'Perror':msg})
+        
+
+        checker=False       
+        for i in pa:
+          if i.isdigit():
+            checker=True
+            break
+        if(checker==False):
+                    msg='*Please make sure your password contains at least one digit'        
+                    return render(req,'signup.html',{'Perror':msg})    
+        
+
+        checker=False      
+        for i in pa:
+            if i.isupper():
+                        checker=True
+                        break   
+        if(checker==False):
+                    msg='*Please make sure your password contains at least one upper case letter'        
+                    return render(req,'signup.html',{'Perror':msg})
+
+
+        checker=False 
+        spchar="!@#$%^&*()-_+={}[]:;'\"<>,.?/"
+        for i in pa:
+            if i in spchar:
+                checker=True
+                break
+        if(checker==False):
+                    msg='*Please make sure your password contains at least one special character'        
+                    return render(req,'signup.html',{'Perror':msg})    
+                    
+       
         if pa==cp:
             User.objects.create(User_name=n,
                           User_email=e,
@@ -80,8 +115,8 @@ def registerdata(req):
             msg="registratin done"
             return render(req,'login.html',{'error':msg})
         else:
-            msg="Password and confirm password not match"
-            return render(req,'signup.html',{'error':msg,'key':data})
+            msg="*Password and confirm password not match"
+            return render(req,'signup.html',{'Perror':msg,'key':data})
 
 
 def logindata(req):
@@ -105,11 +140,11 @@ def logindata(req):
                 button="Logout"
                 return render(req,'userdashboard.html',{'userdata':userdata1 ,'button':button})
             else:
-                error='Email & Password not match'
+                error='*Email & Password not match'
                 return render(req,'login.html',{'error':error})             
 
         else:
-            error='email is not registered'
+            error='*Email is not registered'
             return render(req,'signup.html',{'key':{'email':email}})
 
     else:

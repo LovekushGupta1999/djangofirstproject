@@ -50,13 +50,13 @@ margin-top: 4rem;
   /* signup.html css */
 
   body {
-    background-color: #f8f9fa;
+    background-color: #0a305793;
   }
   .form-signup {
     max-width: 600px;
     margin: auto;
     padding: 2rem;
-    background-color: white;
+    background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
@@ -69,8 +69,8 @@ margin-top: 4rem;
   /* login.html css */
 
 
-  body {
-    background-color: #f8f9fa;
+  .container{
+    background-color: #8cc1f7;
   }
 
   .form-login {
