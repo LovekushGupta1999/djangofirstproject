@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import User
+from .models import Student
 
 def home(req):
     return render(req,'home.html')
@@ -190,3 +191,27 @@ def account1(req,pk):
                    'mycv':userdata.User_document,
                 }
     return render(req,'userdashboard.html',{'userdata':userdata1 ,'button':button})
+
+
+
+
+def fn1(req):
+    data=Student.objects.all()[:5]
+    return render(req,'home.html', {'data':data})
+
+
+def fn2(req):
+    data=Student.objects.all()[::-1][:5]
+    return render(req,'home.html', {'data':data})
+
+def fn3(req):
+    data=Student.objects.all()
+    return render(req,'home.html', {'data':data})
+
+def fn4(req):
+    data=Student.objects.order_by('id')
+    return render(req,'home.html', {'data':data})
+
+def fn5(req):
+    data=Student.objects.order_by('-id')
+    return render(req,'home.html', {'data':data})

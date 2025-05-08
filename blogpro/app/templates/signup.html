@@ -49,12 +49,12 @@
 
           <div class="mb-3">
             <label for="profile_image" class="form-label">Upload Profile Image</label>
-            <input type="file" class="form-control" id="profile_image" name="profile_image" accept="image/*" value="{{key.profilepic}}">
+            <input type="file" class="form-control" id="profile_image" name="profile_image" accept="image/*" value="{{key.profilepic}}" required>
           </div>
 
           <div class="mb-3">
             <label for="document" class="form-label">Upload Document (PDF, DOCX, etc.)</label>
-            <input type="file" class="form-control" id="document" name="document" accept=".pdf,.doc,.docx,.txt" value="{{key.document}}">
+            <input type="file" class="form-control" id="document" name="document" accept=".pdf,.doc,.docx,.txt" value="{{key.document}} " required>
           </div>
 
           <div class="d-grid">

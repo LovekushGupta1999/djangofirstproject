@@ -2,7 +2,7 @@
 {% block title %}<title>User dashboard</title>{% endblock %}
 
 {% block content %}  
-   <main class="dashboard-wrapper">
+   <main class="dashboard-wrapper flex">
       <div class="profile-card text-center">
           <h1 class="mb-1">{{error}}</h1>
         <img src="{{userdata.img.url}}" alt="Profile Image" class="profile-img mb-3">
@@ -16,6 +16,61 @@
           <a href="#" class="btn btn-outline-primary me-2">Edit Profile</a>
           <a href="{% url 'home' %}" class="btn btn-danger">{{button}}</a>
         </div>
+      </div>
+      <div>
+      
+{% if data %}
+  <div class="container text-center mt-5">
+    <h2>show Data  Buttons</h2>
+    <div class="d-grid gap-2 d-md-block mt-4">
+      <button type="button" class="btn btn-info" > <a href="{% url 'fn1'  %}">Button for first 5 student data</a></button>
+      <button type="button" class="btn btn-secondary"><a href="{% url 'fn2' %}">Button for last 5 student data</a></button>
+      <button type="button" class="btn btn-success"><a href="{% url 'fn3' %}">Button for All student data</a></button>
+      <button type="button" class="btn btn-danger"><a href="{% url 'fn4' %}">Button for Ascending order student data</a></button>
+      <button type="button" class="btn btn-warning"><a href="{% url 'fn5' %}">Button for Descending student data</a></button>
+      <button type="button" class="btn btn-info"><a href="{% url 'home' %}">Goto Home</a></button>
+      
+    </div>
+  </div>
+   <div class="container mt-5">
+    <h2 class="mb-4">User Information Table</h2>
+    <table class="table table-striped table-bordered">
+      <thead>
+       <th>S.no</th>
+       <th>Name</th>
+       <th>Contact</th>
+       <th>Email</th>
+      </thead>
+      <tbody>
+      {% for i in data %}
+      <tr class="text-danger">
+
+      <td>{{forloop.counter}} </td>
+      <td>{{i.name}} </td>
+      <td> {{i.contact}}</td>
+      <td>{{i.email}} </td>
+      </tr>
+      {% endfor %}
+      </tbody>
+   </table>
+   </div>
+   {% else %}
+    <div class="container text-center mt-5">
+    <h2>show Data  Buttons</h2>
+    <div class="d-grid gap-2 d-md-block mt-4">
+      <button type="button" class="btn btn-info" > <a href="{% url 'fn1' %}">Button for first 5 student data</a></button>
+      <button type="button" class="btn btn-secondary"><a href="{% url 'fn2' %}">Button for last 5 student data</a></button>
+      <button type="button" class="btn btn-success"><a href="{% url 'fn3' %}">Button for All student data</a></button>
+      <button type="button" class="btn btn-danger"><a href="{% url 'fn4' %}">Button for Ascending order student data</a></button>
+      <button type="button" class="btn btn-warning"><a href="{% url 'fn5' %}">Button for Descending student data</a></button>
+      <button type="button" class="btn btn-info"><a href="{% url 'home' %}">Goto Home</a></button>
+    </div>
+  </div>
+
+  {% endif %}
+
+  <!-- Bootstrap JS (optional) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
       </div>
     </main>
 {% endblock %}
