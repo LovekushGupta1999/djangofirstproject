@@ -7,7 +7,6 @@ def home(req):
 
 def home1(req,pk):
     userdata=User.objects.get(id=pk)
-    print(userdata)
     userdata1={    
                    'id':userdata.id,
                    'name':userdata.User_name,
@@ -25,7 +24,7 @@ def about(req):
 
 def about1(req,pk):
     userdata=User.objects.get(id=pk)
-    print(userdata)
+  
     userdata1={    'id':userdata.id,
                    'name':userdata.User_name,
                    'email':userdata.User_email,
@@ -127,7 +126,7 @@ def logindata(req):
         users=User.objects.filter(User_email=email)
         if users:
             userdata=User.objects.get(User_email=email)
-            print(userdata)
+            
             if userdata.User_password==password:
                 error='Welcome to Dashboard'
                 userdata1={
@@ -137,7 +136,7 @@ def logindata(req):
                    'password':userdata.User_password,
                    'img':userdata.User_image
                 }
-                print(userdata.User_name)
+               
                 button="Logout"
                 return render(req,'userdashboard.html',{'userdata':userdata1 ,'button':button})
             else:
@@ -157,7 +156,7 @@ def feature(req):
 
 def feature1(req,pk):
     userdata=User.objects.get(id=pk)
-    print(userdata)
+
     userdata1={    'id':userdata.id,
                    'name':userdata.User_name,
                    'email':userdata.User_email,
@@ -181,7 +180,7 @@ def account(req):
 def account1(req,pk):
     userdata=User.objects.get(id=pk)
     button="Logout"
-    print(userdata)
+    
     userdata1={    'id':userdata.id,
                    'name':userdata.User_name,
                    'email':userdata.User_email,
@@ -195,23 +194,244 @@ def account1(req,pk):
 
 
 
-def fn1(req):
+def fn6(req,pk):
+    userdata=User.objects.get(id=pk)
+    button="Logout"
+  
+    userdata1={    'id':userdata.id,
+                   'name':userdata.User_name,
+                   'email':userdata.User_email,
+                   'password':userdata.User_password,
+                   'image':userdata.User_image,
+                   'mycv':userdata.User_document,
+                   'img':userdata.User_image
+
+                }
     data=Student.objects.all()[:5]
-    return render(req,'home.html', {'data':data})
+    return render(req,'userdashboard.html', {'data':data,'userdata':userdata1,'button':button})
+
+
+def fn7(req,pk):
+    userdata=User.objects.get(id=pk)
+  
+    button="Logout"
+    userdata1={    'id':userdata.id,
+                   'name':userdata.User_name,
+                   'email':userdata.User_email,
+                   'password':userdata.User_password,
+                   'image':userdata.User_image,
+                   'mycv':userdata.User_document,
+                   'img':userdata.User_image
+
+                }
+    data=Student.objects.all()[::-1][:5]
+    return render(req,'userdashboard.html', {'data':data,'userdata':userdata1,'button':button})
+
+def fn8(req,pk):
+    userdata=User.objects.get(id=pk)
+    button="Logout" 
+    
+    userdata1={    'id':userdata.id,
+                   'name':userdata.User_name,
+                   'email':userdata.User_email,
+                   'password':userdata.User_password,
+                   'image':userdata.User_image,
+                   'mycv':userdata.User_document,
+                   'img':userdata.User_image
+
+                }
+    data=Student.objects.all()
+    return render(req,'userdashboard.html', {'data':data,'userdata':userdata1,'button':button})
+
+def fn9(req,pk):
+    userdata=User.objects.get(id=pk)
+    button="Logout" 
+   
+    userdata1={    'id':userdata.id,
+                   'name':userdata.User_name,
+                   'email':userdata.User_email,
+                   'password':userdata.User_password,
+                   'image':userdata.User_image,
+                   'mycv':userdata.User_document,
+                   'img':userdata.User_image
+
+                }
+    data=Student.objects.order_by('id')
+    return render(req,'userdashboard.html', {'data':data,'userdata':userdata1,'button':button})
+
+def fn10(req,pk):
+    userdata=User.objects.get(id=pk)
+    button="Logout" 
+    
+    userdata1={    'id':userdata.id,
+                   'name':userdata.User_name,
+                   'email':userdata.User_email,
+                   'password':userdata.User_password,
+                   'image':userdata.User_image,
+                   'mycv':userdata.User_document,
+                   'img':userdata.User_image
+
+                }
+    data=Student.objects.order_by('-id')
+    return render(req,'userdashboard.html', {'data':data,'userdata':userdata1,'button':button})
+
+
+def fn1(req):
+    return render(req,'login.html')
 
 
 def fn2(req):
-    data=Student.objects.all()[::-1][:5]
-    return render(req,'home.html', {'data':data})
+    return render(req,'login.html')
 
 def fn3(req):
-    data=Student.objects.all()
-    return render(req,'home.html', {'data':data})
+    return render(req,'login.html')
 
 def fn4(req):
-    data=Student.objects.order_by('id')
-    return render(req,'home.html', {'data':data})
+    return render(req,'login.html')
 
 def fn5(req):
-    data=Student.objects.order_by('-id')
-    return render(req,'home.html', {'data':data})
+    return render(req,'login.html')
+
+
+def edit(req,pk,it):
+    userdata=User.objects.get(id=pk)
+    button="Logout" 
+    userdata1={    'id':userdata.id,
+                   'name':userdata.User_name,
+                   'email':userdata.User_email,
+                   'password':userdata.User_password,
+                   'image':userdata.User_image,
+                   'mycv':userdata.User_document,
+                   'img':userdata.User_image
+
+                }
+    
+    data1=Student.objects.get(id=it)
+    data2={   
+                   'id':data1.id,
+                   'name':data1.name,
+                   'email':data1.email,
+                   'contact':data1.contact,
+                   
+
+                }
+    print(data2)
+    print('hello')
+    return render(req,'userdashboard.html', {'data1':data2,'userdata':userdata1,'button':button})
+    
+
+
+def delete(req,pk,it):
+    userdata=User.objects.get(id=pk)
+    button="Logout" 
+    userdata1={    'id':userdata.id,
+                   'name':userdata.User_name,
+                   'email':userdata.User_email,
+                   'password':userdata.User_password,
+                   'image':userdata.User_image,
+                   'mycv':userdata.User_document,
+                   'img':userdata.User_image
+
+                }
+    
+    data1=Student.objects.get(id=it)
+    data1.delete()
+
+    data=Student.objects.all()
+    print(data)
+    print('hello')
+    return render(req,'userdashboard.html', {'data':data,'userdata':userdata1,'button':button})
+    
+
+def update(req,pk,it):
+    userdata=User.objects.get(id=pk)
+    button="Logout" 
+    userdata1={    'id':userdata.id,
+                   'name':userdata.User_name,
+                   'email':userdata.User_email,
+                   'password':userdata.User_password,
+                   'image':userdata.User_image,
+                   'mycv':userdata.User_document,
+                   'img':userdata.User_image
+
+                }
+    
+    data1=Student.objects.get(id=it)
+    data1.name=req.POST.get('name')
+    data1.contact=req.POST.get('contact')
+    data1.email=req.POST.get('email')
+    data1.save()
+
+    # data={   
+    #                'id':data1.id,
+    #                'name':data1.name,
+    #                'email':data1.email,
+    #                'contact':data1.contact,
+                   
+
+    #             }
+    data=Student.objects.all()
+    print(data)
+    print('hello')
+    return render(req,'userdashboard.html', {'data':data,'userdata':userdata1,'button':button})    
+
+
+def editprofile(req,pk):
+    userdata=User.objects.get(id=pk)
+    button="Logout" 
+    userdata1={    'id':userdata.id,
+                   'name':userdata.User_name,
+                   'email':userdata.User_email,
+                   'password':userdata.User_password,
+                   'mycv':userdata.User_document,
+                   'img':userdata.User_image
+
+                }
+    data={    'id':userdata.id,
+                   'name':userdata.User_name,
+                   'email':userdata.User_email,
+                   'password':userdata.User_password,
+                   'mycv':userdata.User_document,
+                   'img':userdata.User_image
+
+                }
+    
+  
+    return render(req,'userdashboard.html', {'data3':data,'userdata':userdata1,'button':button})
+
+
+    
+def updateprofile(req,pk):
+   
+    
+    data1=User.objects.get(id=pk)
+    data1.User_name=req.POST.get('name')
+    data1.User_image=req.POST.get('image')
+    data1.User_email=req.POST.get('email')
+    data1.User_password=req.POST.get('password')
+    data1.save()
+
+    data={   
+                   'id':data1.id,
+                   'name':data1.User_name,
+                   'email':data1.User_email,
+                   'password':data1.User_password,
+                    'img':data1.User_image,
+                   
+
+                }
+    data=User.objects.all()
+    print(data)
+    print('hello')
+    userdata=User.objects.get(id=pk)
+    button="Logout" 
+    userdata1={    'id':userdata.id,
+                   'name':userdata.User_name,
+                   'email':userdata.User_email,
+                   'password':userdata.User_password,
+                   'image':userdata.User_image,
+                   'mycv':userdata.User_document,
+                   'img':userdata.User_image
+
+                }
+    return render(req,'userdashboard.html', {'userdata':userdata1,'button':button})    

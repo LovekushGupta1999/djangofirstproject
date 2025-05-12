@@ -1,76 +1,219 @@
 {% extends "base.html" %}
 {% block title %}<title>User dashboard</title>{% endblock %}
 
-{% block content %}  
-   <main class="dashboard-wrapper flex">
-      <div class="profile-card text-center">
-          <h1 class="mb-1">{{error}}</h1>
-        <img src="{{userdata.img.url}}" alt="Profile Image" class="profile-img mb-3">
+{% block content %}
+<main class="container-fluid mt-4">
+  <div class="row">
+    <!-- Profile card - left side (1/5th) -->
+    <div class="col-md-2 ">
+      <div class="profile-card text-center border p-3 ">
+        <h4 class="mb-1 text-danger">{{ error }}</h4>
+        <img src="{{ userdata.img.url }}" alt="Profile Image" class="profile-img mb-3 img-fluid rounded-circle">
 
-   
-        <h2 class="mb-1">{{userdata.name}}</h2>
-        <p class="text-muted mb-1">{{userdata.email}}</p>
-        <p class="text-muted">{{userdata.gender}}</p>
+        <h2 class="mb-1">{{ userdata.name }}</h2>
+        <p class="text-muted mb-1">{{ userdata.email }}</p>
+        <p class="text-muted">{{ userdata.gender }}</p>
 
         <div class="mt-4">
-          <a href="#" class="btn btn-outline-primary me-2">Edit Profile</a>
-          <a href="{% url 'home' %}" class="btn btn-danger">{{button}}</a>
+          <a href="{% url 'editprofile' userdata.id %}" class="btn btn-outline-primary me-2 mb-2">Edit Profile</a>
+          <a href="{% url 'home' %}" class="btn btn-danger">{{ button }}</a>
         </div>
       </div>
-      <div>
-      
-{% if data %}
-  <div class="container text-center mt-5">
-    <h2>show Data  Buttons</h2>
-    <div class="d-grid gap-2 d-md-block mt-4">
-      <button type="button" class="btn btn-info" > <a href="{% url 'fn1'  %}">Button for first 5 student data</a></button>
-      <button type="button" class="btn btn-secondary"><a href="{% url 'fn2' %}">Button for last 5 student data</a></button>
-      <button type="button" class="btn btn-success"><a href="{% url 'fn3' %}">Button for All student data</a></button>
-      <button type="button" class="btn btn-danger"><a href="{% url 'fn4' %}">Button for Ascending order student data</a></button>
-      <button type="button" class="btn btn-warning"><a href="{% url 'fn5' %}">Button for Descending student data</a></button>
-      <button type="button" class="btn btn-info"><a href="{% url 'home' %}">Goto Home</a></button>
-      
     </div>
-  </div>
-   <div class="container mt-5">
-    <h2 class="mb-4">User Information Table</h2>
-    <table class="table table-striped table-bordered">
-      <thead>
-       <th>S.no</th>
-       <th>Name</th>
-       <th>Contact</th>
-       <th>Email</th>
-      </thead>
-      <tbody>
-      {% for i in data %}
-      <tr class="text-danger">
 
-      <td>{{forloop.counter}} </td>
-      <td>{{i.name}} </td>
-      <td> {{i.contact}}</td>
-      <td>{{i.email}} </td>
-      </tr>
-      {% endfor %}
-      </tbody>
-   </table>
-   </div>
-   {% else %}
-    <div class="container text-center mt-5">
-    <h2>show Data  Buttons</h2>
-    <div class="d-grid gap-2 d-md-block mt-4">
-      <button type="button" class="btn btn-info" > <a href="{% url 'fn1' %}">Button for first 5 student data</a></button>
-      <button type="button" class="btn btn-secondary"><a href="{% url 'fn2' %}">Button for last 5 student data</a></button>
-      <button type="button" class="btn btn-success"><a href="{% url 'fn3' %}">Button for All student data</a></button>
-      <button type="button" class="btn btn-danger"><a href="{% url 'fn4' %}">Button for Ascending order student data</a></button>
-      <button type="button" class="btn btn-warning"><a href="{% url 'fn5' %}">Button for Descending student data</a></button>
-      <button type="button" class="btn btn-info"><a href="{% url 'home' %}">Goto Home</a></button>
-    </div>
-  </div>
+{% if userdata %}
+    <!-- Buttons and table - right side (4/5th) -->
+    <div class="col-md-10">
+     
+      <div class="row">
+        <!-- Buttons -->
+        <div class="col-md-4">
+          <h2 class="text-center">Show Data Buttons </h2>
+           
+          <div class="d-grid gap-2 mt-4">
+            <a href="{% url 'fn6' pk=userdata.id %}" class="btn btn-info">First 5 Students</a>
+            <a href="{% url 'fn7' pk=userdata.id %}" class="btn btn-secondary">Last 5 Students</a>
+            <a href="{% url 'fn8' pk=userdata.id %}" class="btn btn-success">All Students</a>
+            <a href="{% url 'fn9' pk=userdata.id %}" class="btn btn-danger">Ascending Order</a>
+            <a href="{% url 'fn10' pk=userdata.id %}" class="btn btn-warning">Descending Order</a>
+          </div>
+          
+      
+        </div>
 
-  {% endif %}
+        <!-- Table -->
+         {% if data  %}
+        <div class="col-md-6">
+          <h2 class="text-center mb-4"> Information Table</h2>
+            <form class="d-flex ms-5 me-0 mt-4 ">
+            <input class="form-control w-md me-0" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+          <table class="table table-striped table-bordered mt-4">
+         
+            <thead>
+              <tr>
+                <th>S.no</th>
+                <th>Name</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in data %}
+              <tr class="text-danger">
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.name }}</td>
+                <td>{{ i.contact }}</td>
+                <td>{{ i.email }}</td>
+                <td><button class="btn btn-primary"> <a  href="{% url 'edit' pk=userdata.id it=i.id %}"><i class="fa-solid fa-user-pen text-dark"></i></a></button></td>
+                <td><button class="btn btn-primary"> <a href="{% url 'delete' pk=userdata.id it=i.id %}"><i class="fa-solid fa-trash text-dark"></i></a></button></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+     
 
-  <!-- Bootstrap JS (optional) -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+     
+
+    {% elif data1 %}
+ 
+<div class="col-md-8 ">
+ <div class="container mt-2">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+     <h4 class="mb-0 text-center">Update User Information</h4>
+      <div class="card shadow mt-4">
+       
+         
+     
+        <div class="card-body">
+          <form method="POST" action="{% url 'update' pk=userdata.id it=data1.id %}">
+            {% csrf_token %}
+
+            <div class="mb-3">
+              <label for="name" class="form-label">Full Name</label>
+              <input type="text" class="form-control" id="name" name="name" value="{{ data1.name }}" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="contact" class="form-label">Contact Number</label>
+              <input type="text" class="form-control" id="contact" name="contact" value="{{ data1.contact }}" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" name="email" value="{{ data1.email }}" required>
+            </div>
+
+            <div class="d-grid">
+              <button type="submit" class="btn btn-success">Update</button>
+            </div>
+
+          </form>
+        </div>
       </div>
-    </main>
+    </div>
+  </div>
+</div>
+
+        </div>
+{%elif data3 %}
+ 
+<div class="col-md-8 ">
+ <div class="container mt-2">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+     <h4 class="mb-0 text-center">Update your profile Information</h4>
+      <div class="card shadow mt-4">
+       
+         
+     
+        <div class="card-body">
+          <form method="POST" action="{% url 'updateprofile' pk=userdata.id  %}">
+            {% csrf_token %}
+
+            <div class="mb-3">
+              <label for="name" class="form-label">Full Name</label>
+              <input type="text" class="form-control" id="name" name="name" value="{{ data3.name }}" required>
+            </div>
+
+         
+
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" name="email" value="{{ data3.email }}" required>
+            </div>
+             <div class="mb-3">
+            <label class="form-label d-block">Gender</label>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="gender" id="male" value="Male" required>
+              <label class="form-check-label" for="male">Male</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="gender" id="female" value="Female">
+              <label class="form-check-label" for="female">Female</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="gender" id="other" value="Other">
+              <label class="form-check-label" for="other">Other</label>
+            </div>
+          </div>
+
+          <div class="mb-1">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" value="{{data3.password}}" required>
+          </div>
+              {% comment %} <h6 class="text-warning fs-6" >{{Perror}}</h6> {% endcomment %}
+
+
+          <div class="mb-3">
+            <label for="profile_image" class="form-label">Upload Profile Image</label>
+            <input type="file" class="form-control" id="profile_image" name="profile_image" accept="image/*" value="{{data3.img}}" required>
+          </div>
+
+          {% comment %} <div class="mb-3">
+            <label for="document" class="form-label">Upload Document (PDF, DOCX, etc.)</label>
+            <input type="file" class="form-control" id="document" name="document" accept=".pdf,.doc,.docx,.txt" value="{{data3.document}} " required>
+          </div> {% endcomment %}
+
+            <div class="d-grid">
+              <button type="submit" class="btn btn-success">Update</button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+        </div>
+
+
+     {% else %}
+        <div class="col-md-8 d-flex text-center justify-content-center align-item-center">
+        <h2>No Data available</h2></div>   
+        
+        {% endif %}          
+
+ 
+      
+      
+    
+      
+ 
+        
+         
+        </div>
+      </div>
+  
+  
+{%endif%}
+
+  </div>
+</main>
 {% endblock %}
