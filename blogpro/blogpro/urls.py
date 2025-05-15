@@ -40,15 +40,16 @@ urlpatterns = [
     path('fn4/', views.fn4, name='fn4'),
     path('fn5/', views.fn5, name='fn5'),
 
-    path('fn1/<int:pk>', views.fn6, name='fn6'),
+    path('addstudentform/<int:pk>', views.addstudentform, name='addstudentform'),
     path('fn2/<int:pk>', views.fn7, name='fn7'),
     path('fn3/<int:pk>', views.fn8, name='fn8'),
     path('fn4/<int:pk>', views.fn9, name='fn9'),
     path('fn5/<int:pk>', views.fn10, name='fn10'),
     path('edit/<int:pk>/<int:it>', views.edit, name='edit'),
     path('editprofile/<int:pk>/', views.editprofile, name='editprofile'),
-    path('update/<int:pk>/<int:it>', views.update, name='update'),
+    path('update/<int:pk>/', views.update, name='update'),
     path('updateprofile/<int:pk>/', views.updateprofile, name='updateprofile'),
     path('delete/<int:pk>/<int:it>', views.delete, name='delete'),
+    path('filterdata/<int:pk>', views.filterdata, name='filterdata'),
 
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

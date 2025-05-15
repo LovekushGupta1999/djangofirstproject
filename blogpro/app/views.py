@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import User
 from .models import Student
+from django.db.models import Q
 
 def home(req):
     return render(req,'home.html')
@@ -123,33 +124,52 @@ def logindata(req):
     if req.method=='POST':
         email=req.POST.get('email')
         password=req.POST.get('password')
-        users=User.objects.filter(User_email=email)
-        if users:
-            userdata=User.objects.get(User_email=email)
-            
-            if userdata.User_password==password:
-                error='Welcome to Dashboard'
-                userdata1={
-                    'id':userdata.id,
-                   'name':userdata.User_name,
-                   'email':userdata.User_email,
-                   'password':userdata.User_password,
-                   'img':userdata.User_image
-                }
-               
-                button="Logout"
-                return render(req,'userdashboard.html',{'userdata':userdata1 ,'button':button})
-            else:
-                error='*Email & Password not match'
-                return render(req,'login.html',{'error':error})             
+        adlogin=req.POST.get('adlogin')
+        print(adlogin)
+        print('thanks')
+        if not adlogin:
+            users=User.objects.filter(User_email=email)
+            if users:
+                userdata=User.objects.get(User_email=email)
+                
+                if userdata.User_password==password:
+                    error='Welcome to Dashboard'
+                    userdata1={
+                        'id':userdata.id,
+                    'name':userdata.User_name,
+                    'email':userdata.User_email,
+                    'password':userdata.User_password,
+                    'img':userdata.User_image
+                    }
+                
+                    button="Logout"
+                    return render(req,'userdashboard.html',{'userdata':userdata1 ,'button':button})
+                else:
+                    error='*Email & Password not match'
+                    return render(req,'login.html',{'error':error})             
 
+            else:
+                error='*Email is not registered'
+                return render(req,'signup.html',{'key':{'email':email}})
+
+           
         else:
-            error='*Email is not registered'
-            return render(req,'signup.html',{'key':{'email':email}})
+          admindata={
+          'ademail':"admin123@.com",
+          'adpas':'123'
+          }
+          if admindata.ademail==email and admindata.adpas==password:
+            button="Logout"
+            return render(req,'userdashboard.html',{'admindata':admindata ,'button':button})
+          else:
+            error='*Email & Password not match'
+            return render(req,'login.html',{'error':error})             
+
+        
 
     else:
-        error="404 error server not found"
-        return render(req,'login.html',{'error':error})    
+     error="404 error server not found"
+     return render(req,'login.html',{'error':error})    
 
 def feature(req):
     return render(req,'feature.html')
@@ -317,7 +337,7 @@ def edit(req,pk,it):
                 }
     print(data2)
     print('hello')
-    return render(req,'userdashboard.html', {'data1':data2,'userdata':userdata1,'button':button})
+    return render(req,'userdashboard.html', {'data1':data2,'userdata':userdata1,'button':button,'name':"update"})
     
 
 
@@ -343,7 +363,7 @@ def delete(req,pk,it):
     return render(req,'userdashboard.html', {'data':data,'userdata':userdata1,'button':button})
     
 
-def update(req,pk,it):
+def update(req,pk):
     userdata=User.objects.get(id=pk)
     button="Logout" 
     userdata1={    'id':userdata.id,
@@ -356,6 +376,7 @@ def update(req,pk,it):
 
                 }
     
+    it=req.POST.get('ID')
     data1=Student.objects.get(id=it)
     data1.name=req.POST.get('name')
     data1.contact=req.POST.get('contact')
@@ -378,6 +399,54 @@ def update(req,pk,it):
 
 def editprofile(req,pk):
     userdata=User.objects.get(id=pk)
+    print(userdata)
+    button="Logout" 
+    data=userdata1={    
+                   'id':userdata.id,
+                   'name':userdata.User_name,
+                   'email':userdata.User_email,
+                   'password':userdata.User_password,
+                   'mycv':userdata.User_document,
+                   'image':userdata.User_image
+
+                }
+    print(userdata1)
+    # data={    'id':userdata.id,
+    #                'name':userdata.User_name,
+    #                'email':userdata.User_email,
+    #                'password':userdata.User_password,
+    #                'mycv':userdata.User_document,
+    #                'img':userdata.User_image
+
+    #             }
+    
+  
+    return render(req,'userdashboard.html', {'data3':data,'userdata':userdata1,'button':button})
+
+
+    
+def updateprofile(req,pk):
+   
+  if req.POST:  
+    data1=User.objects.get(id=pk)
+    data1.User_name=req.POST.get('name')
+    data1.User_email=req.POST.get('email')
+    data1.User_password=req.POST.get('password')
+    data1.User_image=req.POST.get('profile_image')
+    data1.save()
+
+    # data={   
+    #                'id':data1.id,
+    #                'name':data1.User_name,
+    #                'email':data1.User_email,
+    #                'password':data1.User_password,
+    #                 'img':data1.User_image,
+                   
+
+    #             }
+    # data=User.objects.all()
+    # print(data)
+    userdata=User.objects.get(id=pk)
     button="Logout" 
     userdata1={    'id':userdata.id,
                    'name':userdata.User_name,
@@ -387,42 +456,11 @@ def editprofile(req,pk):
                    'img':userdata.User_image
 
                 }
-    data={    'id':userdata.id,
-                   'name':userdata.User_name,
-                   'email':userdata.User_email,
-                   'password':userdata.User_password,
-                   'mycv':userdata.User_document,
-                   'img':userdata.User_image
-
-                }
-    
-  
-    return render(req,'userdashboard.html', {'data3':data,'userdata':userdata1,'button':button})
+    return render(req,'userdashboard.html', {'userdata':userdata1,'button':button})    
 
 
-    
-def updateprofile(req,pk):
-   
-    
-    data1=User.objects.get(id=pk)
-    data1.User_name=req.POST.get('name')
-    data1.User_image=req.POST.get('image')
-    data1.User_email=req.POST.get('email')
-    data1.User_password=req.POST.get('password')
-    data1.save()
 
-    data={   
-                   'id':data1.id,
-                   'name':data1.User_name,
-                   'email':data1.User_email,
-                   'password':data1.User_password,
-                    'img':data1.User_image,
-                   
-
-                }
-    data=User.objects.all()
-    print(data)
-    print('hello')
+def addstudentform(req,pk):
     userdata=User.objects.get(id=pk)
     button="Logout" 
     userdata1={    'id':userdata.id,
@@ -434,4 +472,67 @@ def updateprofile(req,pk):
                    'img':userdata.User_image
 
                 }
-    return render(req,'userdashboard.html', {'userdata':userdata1,'button':button})    
+    
+    data2=True
+    
+    print(data2)
+    print('hello')
+    return render(req,'userdashboard.html', {'data1':data2,'userdata':userdata1,'button':button})
+
+
+
+def addstudent(req,pk):
+    userdata=User.objects.get(id=pk)
+    button="Logout" 
+    userdata1={    'id':userdata.id,
+                   'name':userdata.User_name,
+                   'email':userdata.User_email,
+                   'password':userdata.User_password,
+                   'image':userdata.User_image,
+                   'mycv':userdata.User_document,
+                   'img':userdata.User_image
+
+                }
+    
+    data2=True
+    
+    print(data2)
+    print('hello')
+    return render(req,'userdashboard.html', {'data1':data2,'userdata':userdata1,'button':button})
+
+
+
+def filterdata(req,pk):
+    userdata=User.objects.get(id=pk)
+    button="Logout" 
+    userdata1={    'id':userdata.id,
+                   'name':userdata.User_name,
+                   'email':userdata.User_email,
+                   'password':userdata.User_password,
+                   'image':userdata.User_image,
+                   'mycv':userdata.User_document,
+                   'img':userdata.User_image
+
+                }
+    alldata=Student.objects.all()
+    value=req.POST.get('record')
+    print(value)
+    if value:
+      data1=alldata.filter(Q('name'==value) | Q('contact'==value) | Q('email'==value))
+      print(data1)
+
+    # if  data1:     
+      data={   
+                   'id':data1.id,
+                   'name':data1.name,
+                   'email':data1.email,
+                   'contact':data1.contact,
+                   
+
+                }
+      return render(req,'userdashboard.html', {'data':data,'userdata':userdata1,'button':button})
+    # else:
+    #   return render(req,'userdashboard.html', {'userdata':userdata1,'button':button})
+
+
+# -------------------------------admin---------------------------------------------------
