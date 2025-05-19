@@ -13,6 +13,7 @@
    
    
 .blog-footer {
+  width: 100%;
 padding: 2rem 0;
 text-align: center;
 background: #f8f9fa;
@@ -70,7 +71,7 @@ margin-top: 4rem;
 
 
   .container{
-    background-color: #8cc1f7;
+    background-color: #bad7e6;
   }
 
   .form-login {

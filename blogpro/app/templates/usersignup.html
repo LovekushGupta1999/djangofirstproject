@@ -4,9 +4,9 @@
 {% block content %} 
    <main class="container py-5">
       <div class="form-signup">
-        <h2 class="form-title">Create an Account</h2>
+        <h2 class="form-title">Add Student</h2>
         
-        <form action="{% url 'registeradm' %}" method="POST" enctype="multipart/form-data">
+        <form action="{% url 'registerstu' pk=admindata.id %}" method="POST" enctype="multipart/form-data">
          {% csrf_token %}
           <div class="mb-1">
             <label for="username" class="form-label">Username</label>

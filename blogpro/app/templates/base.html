@@ -27,12 +27,13 @@
   <body>
 
 <div class="container">
- {% if userdata or admindata %}
+ {% if  userdata  %}
 
   <header class="blog-header py-3 border-bottom">
     <div class="container">
-      <nav class="navbar navbar-expand-lg navbar-light bg-info">
-        <a class="navbar-brand" href="#">NEWS BLOG</a>
+      <nav class="navbar navbar-expand-lg navbar-light bg-blue">
+               <a class="navbar-brand" href="#"><i class="fa-solid fa-user-graduate"></i>MYCLASS<i class="fa-solid fa-feather f3-normal position-absolute top-0 "></i></a>
+
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -59,7 +60,50 @@
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
           <div class="d-flex justify-content-center align-items-center ms-5">
-             <h6 class="text-success p-0 m-0">Welcome:{{userdata.name}}</h6>
+             <h6 class="text-success p-0 m-0">User:{{userdata.User_name}}</h6>
+          </div>
+          <div class="d-flex justify-content-end align-items-center ms-3">
+            <a class="btn btn-sm btn-outline-secondary" href="{% url 'home' %}">Logout</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+  {% elif admindata %}
+ 
+
+  <header class="blog-header py-3 border-bottom">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-blue">
+           <a class="navbar-brand" href="#"><i class="fa-solid fa-user-graduate"></i>MYCLASS<i class="fa-solid fa-feather f3-normal position-absolute top-0 "></i></a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'homeadm' pk=admindata.id %}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'aboutadm' pk=admindata.id %}">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'featureadm' pk=admindata.id %}">Features</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'accountadm' pk=admindata.id %}">Account</a>
+            </li>
+          </ul>
+
+          <form class="d-flex ms-1 me-5">
+            <input class="form-control me-0" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+          <div class="d-flex justify-content-center align-items-center ms-5">
+             <h6 class="text-success p-0 m-0">Admin:{{admindata.Admin_name}}</h6>
           </div>
           <div class="d-flex justify-content-end align-items-center ms-3">
             <a class="btn btn-sm btn-outline-secondary" href="{% url 'home' %}">Logout</a>
@@ -74,7 +118,7 @@
   <header class="blog-header py-3 border-bottom">
     <div class="container">
       <nav class="navbar navbar-expand-lg navbar-light bg-blue">
-        <a class="navbar-brand" href="#">NEWS BLOG</a>
+        <a class="navbar-brand" href="#"><i class="fa-solid fa-user-graduate"></i>MYCLASS<i class="fa-solid fa-feather f3-normal position-absolute top-0 "></i></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -106,7 +150,7 @@
 
           <div class="d-flex align-items-center ms-5 mt-2">
             <a class="btn btn-sm btn-outline-secondary me-2" href="{% url 'login' %}">Login</a>
-            <a class="btn btn-sm btn-outline-secondary" href="{% url 'register' %}">Sign up</a>
+            <a class="btn btn-sm btn-outline-secondary" href="{% url 'registeradm' %}">Sign up</a>
           </div>
         </div>
       </nav>
@@ -118,6 +162,7 @@
 {% block content %} {% endblock %}
 
 <footer class="blog-footer p-4 bg-primary">
+
   <p>Blog website built with <a href="#" class="text-dark">Django Technology</a>.</p>
   <p><a href="#" class="text-dark">Back to top</a></p>
 </footer>

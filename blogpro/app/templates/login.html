@@ -19,7 +19,7 @@
             <input type="password" class="form-control" id="password" name="password" required>
           </div>
            <div class="mb-3 form-check">
-            <input type="radio" class="form-check-input" id="adlogin" value="true">
+            <input type="checkbox" class="form-check-input" id="adlogin" name="adlogin" value="True">
             <label class="form-check-label" for="adlogin">For Admin login</label>
           </div>
    
@@ -34,7 +34,7 @@
 
           <div class="mt-3 text-center">
             <a href="#">Forgot password?</a> | 
-            <a href="{% url 'register'  %}">Create an account</a>
+            <a href="{% url 'registeradm'  %}">Create an account</a>
           </div>
         </form>
       </div>
