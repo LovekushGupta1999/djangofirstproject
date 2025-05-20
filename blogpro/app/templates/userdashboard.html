@@ -48,7 +48,9 @@
             <h5 class="text-center mb-3">Student Records</h5>
             <form class="d-flex mb-3" method="POST" action="{% url 'filterdata' pk=admindata.id  %}">
               {% csrf_token %}
-              <input class="form-control me-2" type="search" name="record" placeholder="Search by name, email, or contact" aria-label="Search">
+              <input class="form-control me-2" type="search" name="record" placeholder="Search by name"  aria-label="Search">
+              <input class="form-control me-2" type="search" name="record1" placeholder="Search by contact"   aria-label="Search">
+              <input class="form-control me-2" type="search" name="record2" placeholder="Search by  email"  aria-label="Search">
               <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
             <table class="table table-hover table-bordered align-middle">

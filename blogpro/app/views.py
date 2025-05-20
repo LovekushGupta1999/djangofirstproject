@@ -648,36 +648,21 @@ def addstudent(req,pk):
 
 
 def filterdata(req,pk):
-    userdata=Student.objects.get(id=pk)
+    admindata=Admin.objects.get(id=pk)
     button="Logout" 
-    userdata1={    'id':userdata.id,
-                   'name':userdata.User_name,
-                   'email':userdata.User_email,
-                   'password':userdata.User_password,
-                   'image':userdata.User_image,
-                   'mycv':userdata.User_document,
-                   'img':userdata.User_image
+   
+    if req.method=='POST':
+      value=req.POST.get('record')
+      value1=req.POST.get('record1')
+      value2=req.POST.get('record2')
+    
+      data=Student.objects.filter(Q(User_name__icontains=value) | Q(User_contact__icontains=value1) | Q(User_email__icontains=value2))
+      print(data)
 
-                }
-    alldata=Student.objects.all()
-    value=req.POST.get('record')
-    print(value)
-    if value:
-      data1=alldata.filter(Q('name'==value) | Q('contact'==value) | Q('email'==value))
-      print(data1)
-
-    # if  data1:     
-      data={   
-                   'id':data1.id,
-                   'name':data1.name,
-                   'email':data1.email,
-                   'contact':data1.contact,
-                   
-
-                }
-      return render(req,'userdashboard.html', {'data':data,'userdata':userdata1,'button':button})
-    # else:
-    #   return render(req,'userdashboard.html', {'userdata':userdata1,'button':button})
+   
+      return render(req,'userdashboard.html', {'data':data,'admindata':admindata,'button':button})
+    else:
+      return render(req,'userdashboard.html', {'admindata':admindata,'button':button})
 
 
 # -------------------------------admin---------------------------------------------------
