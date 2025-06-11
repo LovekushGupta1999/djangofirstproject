@@ -574,47 +574,4 @@
 
 
 
-        {% elif data3 %}
-        <!-- Update Profile Form -->
-        <div class="col-md-8">
-          <div class="card shadow p-4">
-            <h5 class="text-center mb-3">Edit Profile</h5>
-            <form method="POST" action="{% url 'updateprofile' pk=userdata.id  %}" enctype="multipart/form-data">
-              {% csrf_token %}
-              <div class="mb-3">
-                <label for="name" class="form-label">Full Name</label>
-                <input type="text" class="form-control" id="name" name="name" value="{{ userdata.User_name }}" required>
-              </div>
-              <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" name="email" value="{{ userdata.User_email }}" required>
-              </div>
-              <div class="mb-3">
-                <label class="form-label d-block">Gender</label>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="gender" value="Male" id="male" {% if userdata.User_gender == "Male" %}checked{% endif %}>
-                  <label class="form-check-label" for="male">Male</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="gender" value="Female" id="female" {% if userdata.User_gender == "Female" %}checked{% endif %}>
-                  <label class="form-check-label" for="female">Female</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="gender" value="Other" id="other" {% if userdata.User_gender == "Other" %}checked{% endif %}>
-                  <label class="form-check-label" for="other">Other</label>
-                </div>
-              </div>
-              <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password" value="{{ userdata.User_password }}" required>
-              </div>
-              <div class="mb-3">
-                <label for="profile_image" class="form-label">Profile Image</label>
-                <input type="file" class="form-control" id="profile_image" name="profile_image" accept="image/*">
-              </div>
-              <div class="d-grid">
-                <button type="submit" class="btn btn-success">Update Profile</button>
-              </div>
-            </form>
-          </div>
-        </div>
+   

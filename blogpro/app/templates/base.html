@@ -26,11 +26,11 @@
   </head>
   <body>
 
-<div class="container">
+<div class="container-fluid">
  {% if  userdata  %}
 
   <header class="blog-header py-3 border-bottom">
-    <div class="container">
+    <div class="container-fluid bg-info">
       <nav class="navbar navbar-expand-lg navbar-light bg-blue">
                <a class="navbar-brand" href="#"><i class="fa-solid fa-user-graduate"></i>MYCLASS<i class="fa-solid fa-feather f3-normal position-absolute top-0 "></i></a>
 
@@ -49,6 +49,9 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'feature1' pk=userdata.id %}">Features</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'subscription1' pk=userdata.id %}">Subscribe</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'account1' pk=userdata.id %}">Account</a>
@@ -73,7 +76,7 @@
  
 
   <header class="blog-header py-3 border-bottom">
-    <div class="container">
+    <div class="container-fluid bg-info ">
       <nav class="navbar navbar-expand-lg navbar-light bg-blue">
            <a class="navbar-brand" href="#"><i class="fa-solid fa-user-graduate"></i>MYCLASS<i class="fa-solid fa-feather f3-normal position-absolute top-0 "></i></a>
 
@@ -92,6 +95,9 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'featureadm' pk=admindata.id %}">Features</a>
+            </li>
+             <li class="nav-item">
+              <a class="nav-link" href="{% url 'subscription1' pk=userdata.id %}">Subscribe</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'accountadm' pk=admindata.id %}">Account</a>
@@ -116,7 +122,7 @@
 {% else %}
 
   <header class="blog-header py-3 border-bottom">
-    <div class="container">
+    <div class="container-fluid bg-info">
       <nav class="navbar navbar-expand-lg navbar-light bg-blue">
         <a class="navbar-brand" href="#"><i class="fa-solid fa-user-graduate"></i>MYCLASS<i class="fa-solid fa-feather f3-normal position-absolute top-0 "></i></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
@@ -134,6 +140,9 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'feature' %}">Features</a>
+            </li>
+             <li class="nav-item">
+              <a class="nav-link" href="{% url 'subscription'  %}">Subscribe</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'account' %}">Account</a>
@@ -168,6 +177,6 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-
+</div>
 </body>
 </html>

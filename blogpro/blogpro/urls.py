@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from app import views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -68,5 +68,6 @@ urlpatterns = [
     path('deletestubyadmin/<int:pk>/<int:it>', views.deletestubyadmin, name='deletestubyadmin'),
     path('deletesol/<int:pk>/<int:it>', views.deletesol, name='deletesol'),
     path('filterdata/<int:pk>', views.filterdata, name='filterdata'),
+    path('', include('subscription.urls'))
 
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

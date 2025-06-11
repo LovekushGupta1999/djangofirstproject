@@ -35,7 +35,7 @@ margin-top: 4rem;
     padding: 4rem 2rem;
     text-align: center;
     margin-bottom: 2rem;
-  }
+  } 
 
   .about-section {
     padding: 2rem 0;
@@ -51,7 +51,7 @@ margin-top: 4rem;
   /* signup.html css */
 
   body {
-    background-color: #fff;
+    background-color: #98e4da;
   }
   .form-signup {
     max-width: 600px;
@@ -72,6 +72,7 @@ margin-top: 4rem;
 
   .container{
     background-color: #bad7e6;
+  
   }
 
   .form-login {
