@@ -673,3 +673,28 @@ def filterdata(req,pk):
 
 
 # -------------------------------admin---------------------------------------------------
+
+
+def filterdata(req,pk):
+    admindata=Admin.objects.get(id=pk)
+    button="Logout" 
+   
+    if req.method=='POST':
+      value=req.POST.get('record')
+      value1=req.POST.get('record1')
+      value2=req.POST.get('record2')
+    
+      if value:
+        data=Student.objects.filter(Q(User_name__icontains=value) )
+        if  value1:
+            data=Student.objects.filter(Q(User_name__icontains=value) | Q(User_contact__icontains=value1) )
+            if value2:
+              data=Student.objects.filter(Q(User_name__icontains=value) | Q(User_contact__icontains=value1) | Q(User_email__icontains=value2))
+      elif value1:
+        data=Student.objects.filter(Q(User_contact__icontains=value1) )
+      else:  
+        data=Student.objects.filter(Q(User_email__icontains=value2) )
+   
+      return render(req,'userdashboard.html', {'data':data,'admindata':admindata,'button':button})
+    else:
+      return render(req,'userdashboard.html', {'admindata':admindata,'button':button})
